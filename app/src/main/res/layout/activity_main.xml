@@ -17,7 +17,7 @@
         android:layout_below="@id/main_toolbar"
         android:id="@+id/main_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         >

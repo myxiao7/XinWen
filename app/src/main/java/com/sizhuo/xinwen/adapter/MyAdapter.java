@@ -65,9 +65,11 @@ public class MyAdapter extends BaseAdapter {
         JianLue lue = list.get(position);
         holder.tv01.setText(lue.getTitle());
         holder.tv02.setText(lue.getDescr());
+
         ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(holder.imageView,R.mipmap.img_default,R.mipmap.img_error);
         imageLoader.get(lue.getThumb(), imageListener);
-//        Log.d("xinwen",lue.getId()+lue.getThumb());
+
+        Log.d("xinwen",lue.getId()+"---------------------------");
         return convertView;
     }
 

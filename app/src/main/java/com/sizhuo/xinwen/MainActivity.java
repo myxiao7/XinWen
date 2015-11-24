@@ -2,6 +2,7 @@ package com.sizhuo.xinwen;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sizhuo.xinwen.adapter.MyAdapter;
 import com.sizhuo.xinwen.entity.JianLue;
+import com.sizhuo.xinwen.util.ACache;
 import com.sizhuo.xinwen.util.SystemBarTintManager;
 
 import org.json.JSONArray;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private String httpArg = "query=%7B%27device%27%3A%27android%27%2C%27catid%27%3A1%2C%27pagesize%27%3A10%2C%27sid%27%3A%2711142%27%7D";
     private final String APIKEY = "4d49efb059a423dd040ea184ef594a87";
     private List<JianLue> datas = new ArrayList<JianLue>();
+    private List<JianLue> cacheData = new ArrayList<JianLue>();
+    ACache aCache;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         toolbar.setTitle("新闻");
         setSupportActionBar(toolbar);
-        queue = new MyApplication().getHttpRequeQueue();
+        aCache = ACache.get(this);
+
+        queue = Volley.newRequestQueue(this);
 //        {'device':'android','catid':1,'pagesize':10,'sid':'11142'}
                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL+"?"+httpArg, null, new Response.Listener<JSONObject>() {
             @Override
@@ -67,9 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String res = jsonObject.getString("data");
                     datas = new Gson().fromJson(res, new TypeToken<List<JianLue>>(){}.getType());
-                    Log.d("xinwen","size"+datas.size());
-                    Log.d("xinwen",res);
+                    Log.d("xinwen", "size" + datas.size());
+                    Log.d("xinwen", res);
                     adapter.notifyDataSetChanged(datas);
+                    aCache.remove("cacahe");
+                    aCache.put("cacahe", res);
+//                    Log.d("xinwen", "remove" + aCache.remove("datas"));
+                 /*   aCache.clear();
+                    aCache.put("datas",res);*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -88,8 +99,20 @@ public class MainActivity extends AppCompatActivity {
                 return header;
             }
         };
-        adapter = new MyAdapter(this,datas,queue);
+
+       /* if(datas != null && !datas.equals("")){
+            cacheData = new Gson().fromJson(aCache.getAsString("datas"), new TypeToken<List<JianLue>>(){}.getType());
+        }*/
+        Log.d("xinwen",aCache.getAsString("cacahe")+"11111111111111111111");
+        if(aCache.getAsString("cacahe")== null || aCache.getAsString("cacahe").equals("")){
+            JianLue lue = new JianLue("","测试","测试","测试","测试","","测试");
+            cacheData.add(lue);
+        }else{
+            cacheData = new Gson().fromJson(aCache.getAsString("cacahe"), new TypeToken<List<JianLue>>(){}.getType());
+        }
+        adapter = new MyAdapter(this,cacheData,queue);
         listView.setAdapter(adapter);
+
         queue.add(request);
         request.setTag("infos");
     }
