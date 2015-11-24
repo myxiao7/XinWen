@@ -1,6 +1,7 @@
 package com.sizhuo.xinwen.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,11 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.sizhuo.xinwen.R;
 import com.sizhuo.xinwen.entity.JianLue;
 import com.sizhuo.xinwen.util.BitmapCatche;
@@ -50,7 +56,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        final ViewHolder holder;
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             convertView = inflater.inflate(R.layout.main_list_item,parent, false);
@@ -65,9 +71,23 @@ public class MyAdapter extends BaseAdapter {
         JianLue lue = list.get(position);
         holder.tv01.setText(lue.getTitle());
         holder.tv02.setText(lue.getDescr());
-
+       /* //使用Volley缓存加载图片
         ImageLoader.ImageListener imageListener = ImageLoader.getImageListener(holder.imageView,R.mipmap.img_default,R.mipmap.img_error);
-        imageLoader.get(lue.getThumb(), imageListener);
+        imageLoader.get(lue.getThumb(), imageListener);*/
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .build();
+        //使用UIL加载图片
+        com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(lue.getThumb(), holder.imageView, options, new SimpleImageLoadingListener(), new ImageLoadingProgressListener() {
+            @Override
+            public void onProgressUpdate(String s, View view, int i, int i1) {
+                Log.d("uil",s);
+                Log.d("uil","----------"+i);
+                Log.d("uil","-----------"+i1);
+            }
+        });
 
         Log.d("xinwen",lue.getId()+"---------------------------");
         return convertView;

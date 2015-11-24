@@ -7,6 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 
 /**
  * Created by My灬xiao7 on 2015/11/23.
@@ -17,7 +18,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initImageLoder();
         queue = Volley.newRequestQueue(getApplicationContext());
         //创建默认的ImageLoader配置参数
         ImageLoaderConfiguration imageLoaderConfiguration = ImageLoaderConfiguration.createDefault(this);
@@ -25,9 +25,7 @@ public class MyApplication extends Application {
         com.nostra13.universalimageloader.core.ImageLoader.getInstance().init(imageLoaderConfiguration);
     }
 
-    private void initImageLoder() {
 
-    }
 
     public RequestQueue getHttpRequeQueue(){
         return  queue;
