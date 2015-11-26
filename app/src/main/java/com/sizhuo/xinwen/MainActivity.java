@@ -1,14 +1,17 @@
 package com.sizhuo.xinwen;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.AuthFailureError;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private List<JianLue> datas = new ArrayList<JianLue>();
     private List<JianLue> cacheData = new ArrayList<JianLue>();
     ACache aCache;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,13 +110,23 @@ public class MainActivity extends AppCompatActivity {
         Log.d("xinwen",aCache.getAsString("cacahe")+"11111111111111111111");
         if(aCache.getAsString("cacahe")== null || aCache.getAsString("cacahe").equals("")){
             JianLue lue = new JianLue("","测试","测试","测试","测试","","测试");
-            cacheData.add(lue);
+            datas.add(lue);
         }else{
-            cacheData = new Gson().fromJson(aCache.getAsString("cacahe"), new TypeToken<List<JianLue>>(){}.getType());
+            datas = new Gson().fromJson(aCache.getAsString("cacahe"), new TypeToken<List<JianLue>>(){}.getType());
         }
-        adapter = new MyAdapter(this,cacheData,queue);
+        adapter = new MyAdapter(this,datas,queue);
         listView.setAdapter(adapter);
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this,News_Details.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title",datas.get(position).getTitle());
+                bundle.putString("link",datas.get(position).getLink());
+                intent.putExtra("data", bundle);
+                MainActivity.this.startActivity(intent);
+            }
+        });
         queue.add(request);
         request.setTag("infos");
     }
