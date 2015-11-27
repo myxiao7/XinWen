@@ -1,6 +1,8 @@
 package com.sizhuo.xinwen.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +14,13 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
+import com.bm.library.PhotoView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.sizhuo.xinwen.ImageWatch;
 import com.sizhuo.xinwen.R;
 import com.sizhuo.xinwen.entity.JianLue;
 import com.sizhuo.xinwen.util.BitmapCatche;
@@ -68,7 +72,7 @@ public class MyAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
-        JianLue lue = list.get(position);
+        final JianLue lue = list.get(position);
         holder.tv01.setText(lue.getTitle());
         holder.tv02.setText(lue.getDescr());
        /* //使用Volley缓存加载图片
@@ -86,6 +90,14 @@ public class MyAdapter extends BaseAdapter {
                 Log.d("uil",s);
                 Log.d("uil","----------"+i);
                 Log.d("uil","-----------"+i1);
+            }
+        });
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ImageWatch.class);
+                intent.putExtra("url", lue.getThumb());
+                context.startActivity(intent);
             }
         });
 

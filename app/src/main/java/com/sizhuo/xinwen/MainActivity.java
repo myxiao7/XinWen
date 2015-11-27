@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter = new MyAdapter(this,datas,queue);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this,News_Details.class);
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("data", bundle);
                 MainActivity.this.startActivity(intent);
             }
-        });
+        });*/
         queue.add(request);
         request.setTag("infos");
     }

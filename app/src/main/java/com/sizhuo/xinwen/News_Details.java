@@ -40,7 +40,7 @@ public class News_Details extends AppCompatActivity {
         });
 
         WebView webView = (WebView) findViewById(R.id.news_details_webview);
-        webView.loadUrl(linkStr);
+        webView.loadUrl("http://192.168.1.114:8080/RenYuan/login.html");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDefaultTextEncodingName("UTF-8");  //设置默认的显示编码
         webView.setWebViewClient(new MyWebViewClient());
