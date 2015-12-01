@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sizhuo.xinwen.ImageWatch"
     android:background="@android:color/black">
 
-    <com.bm.library.PhotoView
+    <!--<com.bm.library.PhotoView
         android:id="@+id/image_watch_photoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center"
-        android:layout_centerInParent="true" />
-</RelativeLayout>
+        />-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/image_watch_viewpager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="top"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        >
+        <TextView
+            android:id="@+id/image_watch_cut_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/image_watch_count_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+</FrameLayout>
