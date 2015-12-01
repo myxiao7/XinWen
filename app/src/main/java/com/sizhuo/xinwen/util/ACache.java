@@ -48,6 +48,7 @@ public class ACache {
 
     /**
      * 根据默认的缓存路径和缓存数量，大小创建相应的缓存管理器
+     *
      * @param ctx
      * @return
      */
@@ -71,6 +72,7 @@ public class ACache {
 
     /**
      * 进行获取缓存管理器,看缓存管理器的Map中是否已经存在指定的管理器，如果不存在进行创建，并且加入到map中
+     *
      * @param cacheDir
      * @param max_zise
      * @param max_count
@@ -91,6 +93,7 @@ public class ACache {
 
     /**
      * 进行根据缓存路径，缓存数量和缓存大小创建一个缓存管理器
+     *
      * @param cacheDir
      * @param max_size
      * @param max_count
@@ -106,13 +109,12 @@ public class ACache {
     // =======================================
     // ============ String数据 读写 ==============
     // =======================================
+
     /**
      * 保存 String数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的String数据
+     * @param key   保存的key
+     * @param value 保存的String数据
      */
     public void put(String key, String value) {
         File file = mCache.newFile(key);
@@ -138,12 +140,9 @@ public class ACache {
     /**
      * 保存 String数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的String数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的String数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, String value, int saveTime) {
         put(key, Utils.newStringWithDateInfo(saveTime, value));
@@ -193,13 +192,12 @@ public class ACache {
     // =======================================
     // ============= JSONObject 数据 读写 ==============
     // =======================================
+
     /**
      * 保存 JSONObject数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSON数据
+     * @param key   保存的key
+     * @param value 保存的JSON数据
      */
     public void put(String key, JSONObject value) {
         put(key, value.toString());
@@ -208,12 +206,9 @@ public class ACache {
     /**
      * 保存 JSONObject数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSONObject数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的JSONObject数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, JSONObject value, int saveTime) {
         put(key, value.toString(), saveTime);
@@ -239,13 +234,12 @@ public class ACache {
     // =======================================
     // ============ JSONArray 数据 读写 =============
     // =======================================
+
     /**
      * 保存 JSONArray数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSONArray数据
+     * @param key   保存的key
+     * @param value 保存的JSONArray数据
      */
     public void put(String key, JSONArray value) {
         put(key, value.toString());
@@ -254,12 +248,9 @@ public class ACache {
     /**
      * 保存 JSONArray数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的JSONArray数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的JSONArray数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, JSONArray value, int saveTime) {
         put(key, value.toString(), saveTime);
@@ -285,13 +276,12 @@ public class ACache {
     // =======================================
     // ============== byte 数据 读写 =============
     // =======================================
+
     /**
      * 保存 byte数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的数据
+     * @param key   保存的key
+     * @param value 保存的数据
      */
     public void put(String key, byte[] value) {
         File file = mCache.newFile(key);
@@ -317,12 +307,9 @@ public class ACache {
     /**
      * 保存 byte数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, byte[] value, int saveTime) {
         put(key, Utils.newByteArrayWithDateInfo(saveTime, value));
@@ -369,13 +356,12 @@ public class ACache {
     // =======================================
     // ============= 序列化 数据 读写 ===============
     // =======================================
+
     /**
      * 保存 Serializable数据 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的value
+     * @param key   保存的key
+     * @param value 保存的value
      */
     public void put(String key, Serializable value) {
         put(key, value, -1);
@@ -384,12 +370,9 @@ public class ACache {
     /**
      * 保存 Serializable数据到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的value
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的value
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, Serializable value, int saveTime) {
         ByteArrayOutputStream baos = null;
@@ -455,13 +438,12 @@ public class ACache {
     // =======================================
     // ============== bitmap 数据 读写 =============
     // =======================================
+
     /**
      * 保存 bitmap 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的bitmap数据
+     * @param key   保存的key
+     * @param value 保存的bitmap数据
      */
     public void put(String key, Bitmap value) {
         put(key, Utils.Bitmap2Bytes(value));
@@ -470,12 +452,9 @@ public class ACache {
     /**
      * 保存 bitmap 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的 bitmap 数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的 bitmap 数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, Bitmap value, int saveTime) {
         put(key, Utils.Bitmap2Bytes(value), saveTime);
@@ -497,13 +476,12 @@ public class ACache {
     // =======================================
     // ============= drawable 数据 读写 =============
     // =======================================
+
     /**
      * 保存 drawable 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的drawable数据
+     * @param key   保存的key
+     * @param value 保存的drawable数据
      */
     public void put(String key, Drawable value) {
         put(key, Utils.drawable2Bitmap(value));
@@ -512,12 +490,9 @@ public class ACache {
     /**
      * 保存 drawable 到 缓存中
      *
-     * @param key
-     *            保存的key
-     * @param value
-     *            保存的 drawable 数据
-     * @param saveTime
-     *            保存的时间，单位：秒
+     * @param key      保存的key
+     * @param value    保存的 drawable 数据
+     * @param saveTime 保存的时间，单位：秒
      */
     public void put(String key, Drawable value, int saveTime) {
         put(key, Utils.drawable2Bitmap(value), saveTime);
@@ -567,9 +542,9 @@ public class ACache {
     }
 
     /**
-     * @title 缓存管理器
      * @author 杨福海（michael） www.yangfuhai.com
      * @version 1.0
+     * @title 缓存管理器
      */
     public class ACacheManager {
         private final AtomicLong cacheSize;
@@ -706,9 +681,9 @@ public class ACache {
     }
 
     /**
-     * @title 时间计算工具类
      * @author 杨福海（michael） www.yangfuhai.com
      * @version 1.0
+     * @title 时间计算工具类
      */
     private static class Utils {
 
@@ -783,7 +758,7 @@ public class ACache {
                 String saveDate = new String(copyOfRange(data, 0, 13));
                 String deleteAfter = new String(copyOfRange(data, 14,
                         indexOf(data, mSeparator)));
-                return new String[] { saveDate, deleteAfter };
+                return new String[]{saveDate, deleteAfter};
             }
             return null;
         }

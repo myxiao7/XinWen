@@ -28,7 +28,8 @@ public class ImageWatch extends Activity {
     private TextView countTxt, cutTxt;//图片数量，当前位置
     private ViewPager viewPager;
     private List<JianLue> list = new ArrayList<JianLue>();//图片url
-    private int index=0;//所选图片位置，默认为第一张
+    private int index = 0;//所选图片位置，默认为第一张
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +37,7 @@ public class ImageWatch extends Activity {
         overridePendingTransition(R.anim.fade, R.anim.hold);
         new SetTitleBar(this).init();
         list = (List<JianLue>) this.getIntent().getSerializableExtra("data");
-        index = this.getIntent().getIntExtra("index",0);
+        index = this.getIntent().getIntExtra("index", 0);
         initViews();
         PagerAdapter pagerAdapter = new PagerAdapter() {
             @Override
@@ -69,7 +70,7 @@ public class ImageWatch extends Activity {
 
             @Override
             public void destroyItem(ViewGroup container, int position, Object object) {
-               container.removeView((View) object);
+                container.removeView((View) object);
             }
 
             @Override
@@ -80,13 +81,13 @@ public class ImageWatch extends Activity {
             @Override
             public boolean isViewFromObject(View view, Object object) {
                 //
-                return view==object;
+                return view == object;
             }
         };
-        viewPager.setPageMargin((int)(getResources().getDisplayMetrics().density*15));
+        viewPager.setPageMargin((int) (getResources().getDisplayMetrics().density * 15));
         viewPager.setAdapter(pagerAdapter);
         viewPager.setCurrentItem(index);//当前所选图片
-        cutTxt.setText(index+"");
+        cutTxt.setText(index + "");
         viewPager.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -96,7 +97,7 @@ public class ImageWatch extends Activity {
             @Override
             public void onPageSelected(int position) {
                 position++;
-                cutTxt.setText(position+"");
+                cutTxt.setText(position + "");
             }
 
             @Override
@@ -111,6 +112,6 @@ public class ImageWatch extends Activity {
         countTxt = (TextView) findViewById(R.id.image_watch_count_txt);
         cutTxt = (TextView) findViewById(R.id.image_watch_cut_txt);
 //        photoView = (PhotoView) findViewById(R.id.image_watch_photoview);
-        countTxt.setText(list.size()+"");
+        countTxt.setText(list.size() + "");
     }
 }

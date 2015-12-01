@@ -3,6 +3,7 @@ package com.sizhuo.xinwen.util;
 /**
  * Created by My灬xiao7 on 2015/11/23.
  */
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -21,7 +22,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout.LayoutParams;
+
 import java.lang.reflect.Method;
+
 /**
  * Class to manage status and navigation bar tint effects when using KitKat
  * translucent system UI modes.
@@ -43,6 +46,7 @@ public class SystemBarTintManager {
             }
         }
     }
+
     /**
      * The default system bar tint color value.
      */
@@ -55,6 +59,7 @@ public class SystemBarTintManager {
     private boolean mNavBarTintEnabled;
     private View mStatusBarTintView;
     private View mNavBarTintView;
+
     /**
      * Constructor. Call this in the host activity onCreate method after its
      * content view has been set. You should always create new instances when
@@ -100,6 +105,7 @@ public class SystemBarTintManager {
             setupNavBarView(activity, decorViewGroup);
         }
     }
+
     /**
      * Enable tinting of the system status bar.
      * <p/>
@@ -115,6 +121,7 @@ public class SystemBarTintManager {
             mStatusBarTintView.setVisibility(enabled ? View.VISIBLE : View.GONE);
         }
     }
+
     /**
      * Enable tinting of the system navigation bar.
      * <p/>
@@ -130,6 +137,7 @@ public class SystemBarTintManager {
             mNavBarTintView.setVisibility(enabled ? View.VISIBLE : View.GONE);
         }
     }
+
     /**
      * Apply the specified color tint to all system UI bars.
      *
@@ -139,6 +147,7 @@ public class SystemBarTintManager {
         setStatusBarTintColor(color);
         setNavigationBarTintColor(color);
     }
+
     /**
      * Apply the specified drawable or color resource to all system UI bars.
      *
@@ -148,6 +157,7 @@ public class SystemBarTintManager {
         setStatusBarTintResource(res);
         setNavigationBarTintResource(res);
     }
+
     /**
      * Apply the specified drawable to all system UI bars.
      *
@@ -157,6 +167,7 @@ public class SystemBarTintManager {
         setStatusBarTintDrawable(drawable);
         setNavigationBarTintDrawable(drawable);
     }
+
     /**
      * Apply the specified alpha to all system UI bars.
      *
@@ -166,6 +177,7 @@ public class SystemBarTintManager {
         setStatusBarAlpha(alpha);
         setNavigationBarAlpha(alpha);
     }
+
     /**
      * Apply the specified color tint to the system status bar.
      *
@@ -176,6 +188,7 @@ public class SystemBarTintManager {
             mStatusBarTintView.setBackgroundColor(color);
         }
     }
+
     /**
      * Apply the specified drawable or color resource to the system status bar.
      *
@@ -186,6 +199,7 @@ public class SystemBarTintManager {
             mStatusBarTintView.setBackgroundResource(res);
         }
     }
+
     /**
      * Apply the specified drawable to the system status bar.
      *
@@ -197,6 +211,7 @@ public class SystemBarTintManager {
             mStatusBarTintView.setBackgroundDrawable(drawable);
         }
     }
+
     /**
      * Apply the specified alpha to the system status bar.
      *
@@ -208,6 +223,7 @@ public class SystemBarTintManager {
             mStatusBarTintView.setAlpha(alpha);
         }
     }
+
     /**
      * Apply the specified color tint to the system navigation bar.
      *
@@ -218,6 +234,7 @@ public class SystemBarTintManager {
             mNavBarTintView.setBackgroundColor(color);
         }
     }
+
     /**
      * Apply the specified drawable or color resource to the system navigation bar.
      *
@@ -228,6 +245,7 @@ public class SystemBarTintManager {
             mNavBarTintView.setBackgroundResource(res);
         }
     }
+
     /**
      * Apply the specified drawable to the system navigation bar.
      *
@@ -239,6 +257,7 @@ public class SystemBarTintManager {
             mNavBarTintView.setBackgroundDrawable(drawable);
         }
     }
+
     /**
      * Apply the specified alpha to the system navigation bar.
      *
@@ -250,6 +269,7 @@ public class SystemBarTintManager {
             mNavBarTintView.setAlpha(alpha);
         }
     }
+
     /**
      * Get the system bar configuration.
      *
@@ -258,6 +278,7 @@ public class SystemBarTintManager {
     public SystemBarConfig getConfig() {
         return mConfig;
     }
+
     /**
      * Is tinting enabled for the system status bar?
      *
@@ -266,6 +287,7 @@ public class SystemBarTintManager {
     public boolean isStatusBarTintEnabled() {
         return mStatusBarTintEnabled;
     }
+
     /**
      * Is tinting enabled for the system navigation bar?
      *
@@ -274,6 +296,7 @@ public class SystemBarTintManager {
     public boolean isNavBarTintEnabled() {
         return mNavBarTintEnabled;
     }
+
     private void setupStatusBarView(Context context, ViewGroup decorViewGroup) {
         mStatusBarTintView = new View(context);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, mConfig.getStatusBarHeight());
@@ -286,6 +309,7 @@ public class SystemBarTintManager {
         mStatusBarTintView.setVisibility(View.GONE);
         decorViewGroup.addView(mStatusBarTintView);
     }
+
     private void setupNavBarView(Context context, ViewGroup decorViewGroup) {
         mNavBarTintView = new View(context);
         LayoutParams params;
@@ -301,6 +325,7 @@ public class SystemBarTintManager {
         mNavBarTintView.setVisibility(View.GONE);
         decorViewGroup.addView(mNavBarTintView);
     }
+
     /**
      * Class which describes system bar sizing and other characteristics for the current
      * device configuration.
@@ -320,6 +345,7 @@ public class SystemBarTintManager {
         private final int mNavigationBarWidth;
         private final boolean mInPortrait;
         private final float mSmallestWidthDp;
+
         private SystemBarConfig(Activity activity, boolean translucentStatusBar, boolean traslucentNavBar) {
             Resources res = activity.getResources();
             mInPortrait = (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT);
@@ -332,6 +358,7 @@ public class SystemBarTintManager {
             mTranslucentStatusBar = translucentStatusBar;
             mTranslucentNavBar = traslucentNavBar;
         }
+
         @TargetApi(14)
         private int getActionBarHeight(Context context) {
             int result = 0;
@@ -342,6 +369,7 @@ public class SystemBarTintManager {
             }
             return result;
         }
+
         @TargetApi(14)
         private int getNavigationBarHeight(Context context) {
             Resources res = context.getResources();
@@ -359,6 +387,7 @@ public class SystemBarTintManager {
             }
             return result;
         }
+
         @TargetApi(14)
         private int getNavigationBarWidth(Context context) {
             Resources res = context.getResources();
@@ -370,6 +399,7 @@ public class SystemBarTintManager {
             }
             return result;
         }
+
         @TargetApi(14)
         private boolean hasNavBar(Context context) {
             Resources res = context.getResources();
@@ -387,6 +417,7 @@ public class SystemBarTintManager {
                 return !ViewConfiguration.get(context).hasPermanentMenuKey();
             }
         }
+
         private int getInternalDimensionSize(Resources res, String key) {
             int result = 0;
             int resourceId = res.getIdentifier(key, "dimen", "android");
@@ -395,6 +426,7 @@ public class SystemBarTintManager {
             }
             return result;
         }
+
         @SuppressLint("NewApi")
         private float getSmallestWidthDp(Activity activity) {
             DisplayMetrics metrics = new DisplayMetrics();
@@ -408,6 +440,7 @@ public class SystemBarTintManager {
             float heightDp = metrics.heightPixels / metrics.density;
             return Math.min(widthDp, heightDp);
         }
+
         /**
          * Should a navigation bar appear at the bottom of the screen in the current
          * device configuration? A navigation bar may appear on the right side of
@@ -418,6 +451,7 @@ public class SystemBarTintManager {
         public boolean isNavigationAtBottom() {
             return (mSmallestWidthDp >= 600 || mInPortrait);
         }
+
         /**
          * Get the height of the system status bar.
          *
@@ -426,6 +460,7 @@ public class SystemBarTintManager {
         public int getStatusBarHeight() {
             return mStatusBarHeight;
         }
+
         /**
          * Get the height of the action bar.
          *
@@ -434,6 +469,7 @@ public class SystemBarTintManager {
         public int getActionBarHeight() {
             return mActionBarHeight;
         }
+
         /**
          * Does this device have a system navigation bar?
          *
@@ -442,6 +478,7 @@ public class SystemBarTintManager {
         public boolean hasNavigtionBar() {
             return mHasNavigationBar;
         }
+
         /**
          * Get the height of the system navigation bar.
          *
@@ -451,6 +488,7 @@ public class SystemBarTintManager {
         public int getNavigationBarHeight() {
             return mNavigationBarHeight;
         }
+
         /**
          * Get the width of the system navigation bar when it is placed vertically on the screen.
          *
@@ -460,6 +498,7 @@ public class SystemBarTintManager {
         public int getNavigationBarWidth() {
             return mNavigationBarWidth;
         }
+
         /**
          * Get the layout inset for any system UI that appears at the top of the screen.
          *
@@ -469,6 +508,7 @@ public class SystemBarTintManager {
         public int getPixelInsetTop(boolean withActionBar) {
             return (mTranslucentStatusBar ? mStatusBarHeight : 0) + (withActionBar ? mActionBarHeight : 0);
         }
+
         /**
          * Get the layout inset for any system UI that appears at the bottom of the screen.
          *
@@ -481,6 +521,7 @@ public class SystemBarTintManager {
                 return 0;
             }
         }
+
         /**
          * Get the layout inset for any system UI that appears at the right of the screen.
          *

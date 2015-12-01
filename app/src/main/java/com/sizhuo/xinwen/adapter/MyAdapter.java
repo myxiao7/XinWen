@@ -37,10 +37,10 @@ public class MyAdapter extends BaseAdapter {
     public RequestQueue queue;
 
     public MyAdapter(Context context, List<JianLue> list, RequestQueue queue) {
-        this.context =context;
+        this.context = context;
         this.list = list;
         this.queue = queue;
-        imageLoader = new ImageLoader(queue,new BitmapCatche());
+        imageLoader = new ImageLoader(queue, new BitmapCatche());
     }
 
     @Override
@@ -61,15 +61,15 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        if(convertView == null){
+        if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            convertView = inflater.inflate(R.layout.main_list_item,parent, false);
+            convertView = inflater.inflate(R.layout.main_list_item, parent, false);
             holder = new ViewHolder();
             holder.imageView = (ImageView) convertView.findViewById(R.id.main_list_item_img);
             holder.tv01 = (TextView) convertView.findViewById(R.id.main_list_item_tv01);
             holder.tv02 = (TextView) convertView.findViewById(R.id.main_list_item_tv02);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
         final JianLue lue = list.get(position);
@@ -87,9 +87,9 @@ public class MyAdapter extends BaseAdapter {
         com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(lue.getThumb(), holder.imageView, options, new SimpleImageLoadingListener(), new ImageLoadingProgressListener() {
             @Override
             public void onProgressUpdate(String s, View view, int i, int i1) {
-                Log.d("uil",s);
-                Log.d("uil","----------"+i);
-                Log.d("uil","-----------"+i1);
+                Log.d("uil", s);
+                Log.d("uil", "----------" + i);
+                Log.d("uil", "-----------" + i1);
             }
         });
         holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -101,11 +101,11 @@ public class MyAdapter extends BaseAdapter {
             }
         });
 
-        Log.d("xinwen",lue.getId()+"---------------------------");
+        Log.d("xinwen", lue.getId() + "---------------------------");
         return convertView;
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         public ImageView imageView;
         public TextView tv01;
         public TextView tv02;

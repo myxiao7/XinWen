@@ -22,8 +22,8 @@ public class SetTitleBar {
     /**
      * 沉浸式状态栏
      */
-    public void init(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+    public void init() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
             SystemBarTintManager tintManager = new SystemBarTintManager(activity);
             tintManager.setStatusBarTintEnabled(true);

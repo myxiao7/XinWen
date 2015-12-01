@@ -9,14 +9,15 @@ import com.android.volley.toolbox.ImageLoader;
  * Created by My灬xiao7 on 2015/11/23.
  */
 public class BitmapCatche implements ImageLoader.ImageCache {
-    public int maxSize = 10 * 1024 *1024;//缓存大小
+    public int maxSize = 10 * 1024 * 1024;//缓存大小
     public LruCache<String, Bitmap> mLruCache;
+
     public BitmapCatche() {
-        if(mLruCache ==null){
-            mLruCache = new LruCache<String, Bitmap>(maxSize){
+        if (mLruCache == null) {
+            mLruCache = new LruCache<String, Bitmap>(maxSize) {
                 @Override
                 protected int sizeOf(String key, Bitmap value) {
-                    return value.getRowBytes()*value.getHeight();
+                    return value.getRowBytes() * value.getHeight();
                 }
             };
         }
@@ -29,6 +30,6 @@ public class BitmapCatche implements ImageLoader.ImageCache {
 
     @Override
     public void putBitmap(String s, Bitmap bitmap) {
-        mLruCache.put(s,bitmap);
+        mLruCache.put(s, bitmap);
     }
 }

@@ -26,8 +26,7 @@ public class MyApplication extends Application {
     }
 
 
-
-    public RequestQueue getHttpRequeQueue(){
-        return  queue;
+    public RequestQueue getHttpRequeQueue() {
+        return queue;
     }
 }

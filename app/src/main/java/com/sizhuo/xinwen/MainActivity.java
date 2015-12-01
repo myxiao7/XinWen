@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
@@ -70,13 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
 //        {'device':'android','catid':1,'pagesize':10,'sid':'11142'}
-               JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL+"?"+httpArg, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL + "?" + httpArg, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
 //                Log.d("xinwen",jsonObject.toString());
                 try {
                     String res = jsonObject.getString("data");
-                    datas = new Gson().fromJson(res, new TypeToken<List<JianLue>>(){}.getType());
+                    datas = new Gson().fromJson(res, new TypeToken<List<JianLue>>() {
+                    }.getType());
                     Log.d("xinwen", "size" + datas.size());
                     Log.d("xinwen", res);
                     adapter.notifyDataSetChanged(datas);
@@ -92,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Log.d("xinwen",volleyError.toString());
+                Log.d("xinwen", volleyError.toString());
 
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> header = new HashMap<String, String>();
-                header.put("apikey",APIKEY);
+                header.put("apikey", APIKEY);
                 return header;
             }
         };
@@ -107,14 +108,15 @@ public class MainActivity extends AppCompatActivity {
        /* if(datas != null && !datas.equals("")){
             cacheData = new Gson().fromJson(aCache.getAsString("datas"), new TypeToken<List<JianLue>>(){}.getType());
         }*/
-        Log.d("xinwen",aCache.getAsString("cacahe")+"11111111111111111111");
-        if(aCache.getAsString("cacahe")== null || aCache.getAsString("cacahe").equals("")){
-            JianLue lue = new JianLue("","测试","测试","测试","测试","","测试");
+        Log.d("xinwen", aCache.getAsString("cacahe") + "11111111111111111111");
+        if (aCache.getAsString("cacahe") == null || aCache.getAsString("cacahe").equals("")) {
+            JianLue lue = new JianLue("", "测试", "测试", "测试", "测试", "", "测试");
             datas.add(lue);
-        }else{
-            datas = new Gson().fromJson(aCache.getAsString("cacahe"), new TypeToken<List<JianLue>>(){}.getType());
+        } else {
+            datas = new Gson().fromJson(aCache.getAsString("cacahe"), new TypeToken<List<JianLue>>() {
+            }.getType());
         }
-        adapter = new MyAdapter(this,datas,queue);
+        adapter = new MyAdapter(this, datas, queue);
         listView.setAdapter(adapter);
         /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

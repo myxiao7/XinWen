@@ -20,6 +20,7 @@ import com.sizhuo.xinwen.util.SetTitleBar;
 public class News_Details extends AppCompatActivity {
 
     private String errorHtml = "<html><body><h1>Page not find!</h1></body></html>";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class News_Details extends AppCompatActivity {
         webView.setWebViewClient(new MyWebViewClient());
     }
 
-    public class MyWebViewClient extends WebViewClient{
+    public class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
